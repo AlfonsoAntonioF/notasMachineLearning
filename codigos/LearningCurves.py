@@ -4,6 +4,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
+# Generar Datos
 m = 100
 X = 6 * np.random.rand(m, 1) - 3
 y = 0.5 * X**2 + X + 2 + np.random.randn(m, 1)
@@ -23,7 +24,7 @@ def plot_learning_curves(model, X, y):
     plt.show()
 
 lin_reg = LinearRegression()
-#plot_learning_curves(lin_reg, X, y)
+plot_learning_curves(lin_reg, X, y)
 
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
@@ -33,3 +34,17 @@ polynomial_regression = Pipeline([
     ("lin_reg", LinearRegression()),
 ])
 plot_learning_curves(polynomial_regression, X, y)
+
+
+
+# Ridge Regression
+from sklearn.linear_model import Ridge
+ridge_reg = Ridge(alpha=1, solver="cholesky")
+ridge_reg.fit(X, y)
+print(f'ridge_reg.predict([[1.5]]): {ridge_reg.predict([[1.5]])}')
+
+# using Stochastic Gradient Descent
+from sklearn.linear_model import SGDRegressor
+sgd_reg = SGDRegressor(penalty="l2")
+sgd_reg.fit(X, y.ravel())
+print(f'sgd_reg.predict([[1.5]]): {sgd_reg.predict([[1.5]])}')
