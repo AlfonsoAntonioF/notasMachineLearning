@@ -24,7 +24,7 @@ def plot_learning_curves(model, X, y):
     plt.show()
 
 lin_reg = LinearRegression()
-plot_learning_curves(lin_reg, X, y)
+#plot_learning_curves(lin_reg, X, y)
 
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
@@ -33,7 +33,7 @@ polynomial_regression = Pipeline([
     ("poly_features", PolynomialFeatures(degree=10, include_bias=False)),
     ("lin_reg", LinearRegression()),
 ])
-plot_learning_curves(polynomial_regression, X, y)
+#plot_learning_curves(polynomial_regression, X, y)
 
 
 
@@ -48,3 +48,11 @@ from sklearn.linear_model import SGDRegressor
 sgd_reg = SGDRegressor(penalty="l2")
 sgd_reg.fit(X, y.ravel())
 print(f'sgd_reg.predict([[1.5]]): {sgd_reg.predict([[1.5]])}')
+
+
+# lasso Regression
+
+from sklearn.linear_model import Lasso
+lasso_reg = Lasso(alpha=0.1)
+lasso_reg.fit(X, y)
+print(f'lasso_reg.predict([[1.5]]): {lasso_reg.predict([[1.5]])}')
